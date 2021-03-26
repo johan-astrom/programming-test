@@ -1,4 +1,4 @@
-INPUT, EXPECTED
+STRING1, STRING2
 hello, hello
 HeLlo, hElLO
 hello, olleh
