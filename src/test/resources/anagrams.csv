@@ -1,0 +1,13 @@
+INPUT, EXPECTED
+hello, hello
+HeLlo, hElLO
+hello, olleh
+hello, leloh
+world, world
+WoRlD, wOrLd
+world, dlrow
+world, lorwD
+123, 123
+123, 321
+!"#, !"#
+!"#€%&/()=?, ?=)(/&%€#"!
