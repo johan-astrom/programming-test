@@ -7,6 +7,10 @@ import com.johanastrom.StringUtilities;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Johan Åström 26/3 2021
+ */
+
 public class StringUtilitiesTest {
 
     private StringUtilities stringUtils;

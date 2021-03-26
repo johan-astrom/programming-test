@@ -1,6 +1,7 @@
 package com.johanastrom;
 
 import java.util.Arrays;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class StringUtilities {
@@ -17,14 +18,7 @@ public class StringUtilities {
         char[]chars2 = s2.toLowerCase().toCharArray();
         Arrays.sort(chars2);
 
-
-
-        for (int i=0; i<chars1.length; i++){
-            if (chars1[i]!=chars2[i]){
-                return false;
-            }
-        }
-        return true;
+        return Arrays.equals(chars1, chars2);
     }
 
 }
