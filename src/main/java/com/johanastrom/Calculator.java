@@ -16,7 +16,7 @@ public class Calculator {
         }
 
         String[] numberStrings = expression.split("[^0-9.]+");
-        String[] operators = expression.split("\\d+(\\.\\d+)?$");
+        String[] operators = expression.split("\\d+(\\.\\d+)?");
         double[] numbers = new double[numberStrings.length];
         for (int i = 0; i < numberStrings.length; i++) {
             numbers[i] = Double.parseDouble(numberStrings[i]);
