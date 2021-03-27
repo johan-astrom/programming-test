@@ -1,7 +1,5 @@
 package com.johanastrom;
 
-import java.util.Arrays;
-
 /**
  * Johan Åström 26/3 2021
  */
@@ -12,15 +10,13 @@ public class Calculator {
 
         expression = expression.replaceAll("\\s", "");
 
-        if (expression.substring(0, 1).matches("\\D") ||
-        expression.matches(".*[a-zA-Z].*") ||
-        expression.matches(".*\\D{2,10}.*")){
+        if (!isValidExpression(expression)){
             System.out.println("Invalid input - 0.0 returned");
-            return 0;
+            return 0.0;
         }
 
-        String[] numberStrings = expression.split("\\D+");
-        String[] operators = expression.split("\\d+");
+        String[] numberStrings = expression.split("[^0-9.]+");
+        String[] operators = expression.split("\\d+(\\.\\d+)?$");
         double[] numbers = new double[numberStrings.length];
         for (int i = 0; i < numberStrings.length; i++) {
             numbers[i] = Double.parseDouble(numberStrings[i]);
@@ -28,7 +24,7 @@ public class Calculator {
 
         for (int i = 0; i < operators.length; i++) {
             if (operators[i].matches("[*/]")){
-                double term = calculate(operators[i], numbers[i-1], numbers[i]);
+                double term = calculateTerms(operators[i], numbers[i-1], numbers[i]);
                 numbers[i-1] = term;
                 String[] operatorsTemp = new String[operators.length-1];
                 double[] numbersTemp = new double[numbers.length-1];
@@ -46,13 +42,13 @@ public class Calculator {
         }
         double result = numbers[0];
         for (int i = 1; i < operators.length+1 - 1; i++) {
-            result = calculate(operators[i], result, numbers[i]);
+            result = calculateTerms(operators[i], result, numbers[i]);
         }
 
         return result;
     }
 
-    private double calculate(String operator, double a, double b) {
+    private double calculateTerms(String operator, double a, double b) {
         switch (operator) {
             case "+":
                 return a + b;
@@ -62,8 +58,14 @@ public class Calculator {
                 return a * b;
             case "/":
                 return a / b;
-
+            default:
+                return 0.0;
         }
-        return 0;
+    }
+
+    private boolean isValidExpression(String expression){
+        return !expression.substring(0, 1).matches("\\D") &&
+                !expression.matches(".*[a-zA-Z].*") &&
+                !expression.matches(".*\\D{2,10}.*");
     }
 }

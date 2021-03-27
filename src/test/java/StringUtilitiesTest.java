@@ -1,6 +1,7 @@
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 import com.johanastrom.StringUtilities;
@@ -27,13 +28,13 @@ public class StringUtilitiesTest {
 
     @ParameterizedTest
     @CsvFileSource(resources = "anagrams.csv", numLinesToSkip = 1)
-    void callingIsAnagramWithAnagramsShouldReturnTrueRegardlessOfCase(String s1, String s2){
+    public void callingIsAnagramWithAnagramsShouldReturnTrueRegardlessOfCase(String s1, String s2){
         assertTrue(this.stringUtils.isAnagram(s1, s2));
     }
 
     @ParameterizedTest
     @CsvFileSource(resources = "erroneous-anagrams.csv", numLinesToSkip = 1)
-    void callingIsAnagramWithNonAnagramsShouldReturnFalse(String s1, String s2){
+    public void callingIsAnagramWithNonAnagramsShouldReturnFalse(String s1, String s2){
         assertFalse(this.stringUtils.isAnagram(s1, s2));
     }
 

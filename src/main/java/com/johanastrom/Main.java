@@ -1,3 +1,5 @@
+package com.johanastrom;
+
 import com.johanastrom.Calculator;
 
 import java.util.Scanner;
@@ -24,6 +26,7 @@ public class Main {
             System.out.println("Enter a mathematical expression to evaluate; press \"x\" to exit.");
             String userInput = sc.nextLine();
             if (userInput.equalsIgnoreCase("x")) {
+                System.out.println("\n============** Good Bye! **============\n");
                 loop = false;
                 break;
             }
