@@ -38,6 +38,7 @@ public class Calculator {
                 }
                 operators = operatorsTemp;
                 numbers = numbersTemp;
+                i--;
             }
         }
         double result = numbers[0];
