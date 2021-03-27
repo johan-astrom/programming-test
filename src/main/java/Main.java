@@ -1,3 +1,4 @@
+import com.johanastrom.Calculator;
 import com.johanastrom.StringUtilities;
 import com.johanastrom.WebUtilities;
 
@@ -8,7 +9,8 @@ import com.johanastrom.WebUtilities;
 public class Main {
 
     public static void main(String[] args) {
-        WebUtilities webUtils = new WebUtilities();
-        webUtils.printWebLinks("www.google.se");
+        Calculator calc = new Calculator();
+        double result = calc.evaluate("3-1*2/8+5*10");
+        System.out.println(result);
     }
 }
