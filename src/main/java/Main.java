@@ -1,6 +1,6 @@
 import com.johanastrom.Calculator;
-import com.johanastrom.StringUtilities;
-import com.johanastrom.WebUtilities;
+
+import java.util.Scanner;
 
 /**
  * Johan Åström 26/3 2021
@@ -8,9 +8,28 @@ import com.johanastrom.WebUtilities;
 
 public class Main {
 
+    private static Scanner sc = new Scanner(System.in);
+    private static Calculator calc = new Calculator();
+
     public static void main(String[] args) {
-        Calculator calc = new Calculator();
-        double result = calc.evaluate("3-1*2/8+5*10");
-        System.out.println(result);
+
+        menu();
+
+    }
+
+    public static void menu() {
+        System.out.println("============** Johan Åström - Programming Test **============\n");
+        boolean loop = true;
+        while (loop) {
+            System.out.println("Enter a mathematical expression to evaluate; press \"x\" to exit.");
+            String userInput = sc.nextLine();
+            if (userInput.equalsIgnoreCase("x")) {
+                loop = false;
+                break;
+            }
+            double result = calc.evaluate(userInput);
+            System.out.println("Result: " + result + "\n");
+        }
+
     }
 }

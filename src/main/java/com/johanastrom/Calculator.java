@@ -10,7 +10,11 @@ public class Calculator {
 
     public double evaluate(String expression) {
 
-        if (!expression.substring(0, 1).matches("\\d")){
+        expression = expression.replaceAll("\\s", "");
+
+        if (expression.substring(0, 1).matches("\\D") ||
+        expression.matches(".*[a-zA-Z].*") ||
+        expression.matches(".*\\D{2,10}.*")){
             System.out.println("Invalid input - 0.0 returned");
             return 0;
         }
@@ -22,15 +26,24 @@ public class Calculator {
             numbers[i] = Double.parseDouble(numberStrings[i]);
         }
 
-        /*System.out.println(Arrays.toString(numbers));
-        System.out.println(Arrays.toString(operators));
-        for (double number : numbers) {
-            System.out.println(number);
+        for (int i = 0; i < operators.length; i++) {
+            if (operators[i].matches("[*/]")){
+                double term = calculate(operators[i], numbers[i-1], numbers[i]);
+                numbers[i-1] = term;
+                String[] operatorsTemp = new String[operators.length-1];
+                double[] numbersTemp = new double[numbers.length-1];
+                for (int j = i; j < operators.length-1; j++) {
+                    operators[j] = operators[j+1];
+                    numbers[j] = numbers[j+1];
+                }
+                for (int j = 0; j < operatorsTemp.length; j++) {
+                    operatorsTemp[j] = operators[j];
+                    numbersTemp[j] = numbers[j];
+                }
+                operators = operatorsTemp;
+                numbers = numbersTemp;
+            }
         }
-        for (String operator : operators) {
-            System.out.println(operator);
-        }*/
-
         double result = numbers[0];
         for (int i = 1; i < operators.length+1 - 1; i++) {
             result = calculate(operators[i], result, numbers[i]);
