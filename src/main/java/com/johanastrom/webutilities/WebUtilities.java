@@ -1,4 +1,4 @@
-package com.johanastrom;
+package com.johanastrom.webutilities;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;

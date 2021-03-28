@@ -1,4 +1,4 @@
-package com.johanastrom;
+package com.johanastrom.calculator;
 
 /**
  * Johan Åström 26/3 2021

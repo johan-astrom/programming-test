@@ -1,4 +1,4 @@
-package com.johanastrom;
+package com.johanastrom.stringutilities;
 
 import java.util.Arrays;
 import java.util.stream.IntStream;
