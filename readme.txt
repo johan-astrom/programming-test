@@ -1,4 +1,5 @@
 ** Johan Åström - Programming Test **
+
 PREREQUISITES:
     Maven - https://maven.apache.org/install.html
     Selenium Web Driver - https://www.selenium.dev/documentation/en/selenium_installation/
