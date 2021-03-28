@@ -11,7 +11,7 @@ INSTRUCTIONS:
         git pull https://github.com/johan-astrom/programming-test
         mvn package
         java -jar target/johan-astrom-programmingtest-1.0.jar
-And follow the instructions to use the calculators.
+Press enter, and follow the instructions to use the calculators.
 mvn package will compile the code and run the unit tests for the isAnagram method in the StringUtilities class.
     To only run the unit tests, type:
         mvn test
