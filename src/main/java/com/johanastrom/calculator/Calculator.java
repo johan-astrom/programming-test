@@ -6,22 +6,54 @@ package com.johanastrom.calculator;
 
 public class Calculator {
 
-    public double evaluate(String expression) {
-
+    //Level 1
+    public double evaluateOneTerm(String expression){
         expression = expression.replaceAll("\\s", "");
 
-        if (!isValidExpression(expression)){
+        if (isInvalidExpression(expression)){
             System.out.println("Invalid input - 0.0 returned");
             return 0.0;
         }
-
-        String[] numberStrings = expression.split("[^0-9.]+");
         String[] operators = expression.split("\\d+(\\.\\d+)?");
-        double[] numbers = new double[numberStrings.length];
-        for (int i = 0; i < numberStrings.length; i++) {
-            numbers[i] = Double.parseDouble(numberStrings[i]);
+        double[] numbers = extractNumbers(expression);
+
+        if (numbers.length>2 || operators.length>2){
+            System.out.println("Expression is too long - please enter exactly two numbers and one operand! 0.0 returned.");
+            return 0.0;
         }
 
+        return calculateTerms(operators[1], numbers[0], numbers[1]);
+    }
+
+    //Level 2
+    public double evaluateWithSamePrecedence(String expression) {
+        expression = expression.replaceAll("\\s", "");
+
+        if (isInvalidExpression(expression)){
+            System.out.println("Invalid input - 0.0 returned");
+            return 0.0;
+        }
+        String[] operators = expression.split("\\d+(\\.\\d+)?");
+        double[] numbers = extractNumbers(expression);
+
+        return calculateResult(numbers, operators);
+    }
+
+        //Level 3
+        public double evaluateWithDifferentPrecedences(String expression) {
+        expression = expression.replaceAll("\\s", "");
+
+        if (isInvalidExpression(expression)){
+            System.out.println("Invalid input - 0.0 returned");
+            return 0.0;
+        }
+        String[] operators = expression.split("\\d+(\\.\\d+)?");
+        double[] numbers = extractNumbers(expression);
+
+            /* Scans for operators of higher precedence (*, /) and calculates those terms first,
+         * replaces the first number in the term with the result, then removes the second one as well as the operator,
+         * making the arrays one element shorter.
+            */
         for (int i = 0; i < operators.length; i++) {
             if (operators[i].matches("[*/]")){
                 double term = calculateTerms(operators[i], numbers[i-1], numbers[i]);
@@ -41,12 +73,24 @@ public class Calculator {
                 i--;
             }
         }
-        double result = numbers[0];
-        for (int i = 1; i < operators.length+1 - 1; i++) {
-            result = calculateTerms(operators[i], result, numbers[i]);
-        }
 
-        return result;
+        return calculateResult(numbers, operators);
+    }
+
+    private boolean isInvalidExpression(String expression){
+        return expression.substring(0, 1).matches("\\D") ||
+                expression.substring(expression.length()-1).matches("\\D") ||
+                expression.matches(".*[a-zA-Z].*") ||
+                expression.matches(".*\\D{2,}.*");
+    }
+
+    private double[] extractNumbers(String expression){
+        String[] numberStrings = expression.split("[^0-9.]+");
+        double[] numbers = new double[numberStrings.length];
+        for (int i = 0; i < numberStrings.length; i++) {
+            numbers[i] = Double.parseDouble(numberStrings[i]);
+        }
+        return numbers;
     }
 
     private double calculateTerms(String operator, double a, double b) {
@@ -64,9 +108,11 @@ public class Calculator {
         }
     }
 
-    private boolean isValidExpression(String expression){
-        return !expression.substring(0, 1).matches("\\D") &&
-                !expression.matches(".*[a-zA-Z].*") &&
-                !expression.matches(".*\\D{2,10}.*");
+    private double calculateResult(double[] numbers, String[] operators){
+        double result = numbers[0];
+        for (int i = 1; i < operators.length+1 - 1; i++) {
+            result = calculateTerms(operators[i], result, numbers[i]);
+        }
+        return result;
     }
 }

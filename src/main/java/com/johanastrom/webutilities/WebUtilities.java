@@ -12,9 +12,6 @@ import java.util.List;
 public class WebUtilities {
 
     public void printWebLinks(String url){
-        if (!url.startsWith("http")){
-            url = "http://" + url;
-        }
 
         WebDriver driver = new ChromeDriver();
         try {

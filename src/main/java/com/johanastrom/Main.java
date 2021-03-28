@@ -1,8 +1,6 @@
 package com.johanastrom;
 
-import com.johanastrom.calculator.Calculator;
-
-import java.util.Scanner;
+import com.johanastrom.userinteraction.CalculatorUserInteraction;
 
 /**
  * Johan Åström 26/3 2021

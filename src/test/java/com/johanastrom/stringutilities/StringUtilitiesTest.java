@@ -6,6 +6,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 import com.johanastrom.stringutilities.StringUtilities;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -37,6 +38,12 @@ public class StringUtilitiesTest {
     @CsvFileSource(resources = "erroneous-anagrams.csv", numLinesToSkip = 1)
     public void callingIsAnagramWithNonAnagramsShouldReturnFalse(String s1, String s2){
         assertFalse(this.stringUtils.isAnagram(s1, s2));
+    }
+
+    @ParameterizedTest
+    @NullAndEmptySource
+    public void callingIsAnagramWithEmptyOrNullStringShouldReturnFalse(String s1){
+        assertFalse(this.stringUtils.isAnagram(s1, s1));
     }
 
     @AfterAll

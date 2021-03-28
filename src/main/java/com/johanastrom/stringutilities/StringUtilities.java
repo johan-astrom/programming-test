@@ -8,7 +8,7 @@ public class StringUtilities {
 
     public boolean isAnagram(String s1, String s2){
 
-        if (s1.length()!=s2.length()){
+        if (s1==null || s2==null || s1.length()!=s2.length() || s1.isBlank()){
             return false;
         }
 
