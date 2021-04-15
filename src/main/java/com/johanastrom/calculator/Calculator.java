@@ -81,6 +81,7 @@ public class Calculator {
         return expression.substring(0, 1).matches("\\D") ||
                 expression.substring(expression.length()-1).matches("\\D") ||
                 expression.matches(".*[a-zA-Z].*") ||
+                expression.matches("\\d+\\.\\d*\\..*") ||
                 expression.matches(".*\\D{2,}.*");
     }
 
@@ -88,7 +89,7 @@ public class Calculator {
         String[] numberStrings = expression.split("[^0-9.]+");
         double[] numbers = new double[numberStrings.length];
         for (int i = 0; i < numberStrings.length; i++) {
-            numbers[i] = Double.parseDouble(numberStrings[i]);
+                numbers[i] = Double.parseDouble(numberStrings[i]);
         }
         return numbers;
     }
